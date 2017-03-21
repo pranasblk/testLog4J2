@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <properties>
+    <property name="logMsgPattern">%d{HH:mm:ss.SSS} %nano [%t] %-5level %logger{1.} - %msg%n</property>
+    <property name="logDir">build/logs/</property>
+  </properties>
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT" follow="true">
+			<PatternLayout pattern="${logMsgPattern}" />
+		</Console>
+		<RandomAccessFile name="FILE" fileName="${logDir}/file.log">
+			<PatternLayout pattern="${logMsgPattern}" />
+		</RandomAccessFile>
+	</Appenders>
+	<Loggers>
+		<Root level="INFO">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="FILE" />
+		</Root>
+	</Loggers>
+</Configuration>
