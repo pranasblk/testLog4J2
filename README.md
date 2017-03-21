@@ -1,4 +1,4 @@
-Error produced by ```./gradlew testLog*:```
+Error produced by ```./gradlew testLog```
 
 ```
 ERROR StatusLogger Unable to create custom ContextSelector. Falling back to default.
