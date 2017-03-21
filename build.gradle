@@ -1,0 +1,32 @@
+apply plugin: 'java'
+
+repositories {
+  mavenCentral()
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '3.2'
+}
+
+dependencies {
+
+  // Logging
+  compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.24'
+  runtime group: 'com.lmax', name: 'disruptor', version: '3.3.6'
+  runtime group: 'org.apache.logging.log4j', name: 'log4j-api', version: log4JVersion
+  runtime group: 'org.apache.logging.log4j', name: 'log4j-core', version: log4JVersion
+  runtime group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: log4JVersion
+}
+
+task testLog {
+  doLast {
+    javaexec {
+      jvmArgs = ['-Xmx2g', '-Xms2g', '-XX:+UseG1GC', '-XX:MaxGCPauseMillis=20',
+                 '-Dlog4j2.garbagefree.threadContextMap=true',
+                 '-DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContext' ]
+      classpath sourceSets.main.runtimeClasspath
+      setMain 'net.orangecap.TestLog'
+    }
+  }
+}
+
